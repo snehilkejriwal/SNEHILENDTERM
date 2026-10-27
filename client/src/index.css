@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  body { @apply bg-frost text-ink font-sans; font-feature-settings: 'ss01'; }
+  ::selection { background: #059669; color: #FFFFFF; }
+  :focus-visible { outline: 2px solid #10B981; outline-offset: 3px; border-radius: 6px; }
+  .page-dark :focus-visible { outline-color: #34D399; }
+  :focus:not(:focus-visible) { outline: none; }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+@keyframes aurora-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@layer components {
+  /* Display typography: editorial serif with expanded black grotesk */
+  .display-serif { @apply font-serif uppercase; letter-spacing: -0.01em; line-height: .86; }
+  .display-black { @apply font-sans uppercase; font-weight: 850; font-stretch: 112%; letter-spacing: -0.035em; line-height: .86; }
+
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,.85), rgba(240,249,245,.6));
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255,255,255,.8);
+  }
+
+  .glass-dark {
+    background: linear-gradient(135deg, rgba(14,28,21,.75), rgba(7,16,12,.6));
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(52,211,153,.15);
+  }
+
+  .chamfer { --cut: 56px; clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
+  @media (min-width: 640px) { .chamfer { --cut: 120px; } }
+
+  .glacier-wash {
+    background:
+      radial-gradient(70% 65% at 85% 0%, rgba(52,211,153,.2), transparent 70%),
+      radial-gradient(60% 60% at 5% 100%, rgba(20,184,166,.18), transparent 70%),
+      linear-gradient(170deg, #11261D 0%, #081711 55%, #040D09 100%);
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(rgba(52,211,153,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52,211,153,.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(75% 70% at 50% 45%, #000 30%, transparent 85%);
+    -webkit-mask-image: radial-gradient(75% 70% at 50% 45%, #000 30%, transparent 85%);
+  }
+
+  /* Deep Obsidian Emerald canvas */
+  .page-dark {
+    background-color: #050B08;
+    background-image:
+      radial-gradient(65% 45% at 80% 0%, rgba(52,211,153,.16), transparent 70%),
+      radial-gradient(55% 40% at 15% 30%, rgba(20,184,166,.14), transparent 70%),
+      radial-gradient(50% 45% at 50% 100%, rgba(245,158,11,.08), transparent 75%),
+      linear-gradient(rgba(52,211,153,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52,211,153,.03) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+    background-attachment: fixed;
+  }
+
+  /* Shimmering emerald & champagne gold aurora text */
+  .text-aurora {
+    background: linear-gradient(110deg, #FFFFFF 0%, #34D399 25%, #2DD4BF 50%, #FBBF24 75%, #FFFFFF 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: aurora-flow 6s ease-in-out infinite;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-emerald-400/35 bg-emerald-500/[0.12] px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-200 shadow-[0_0_18px_rgba(16,185,129,0.22)] backdrop-blur-md;
+  }
+
+  .silk {
+    background:
+      radial-gradient(60% 50% at 20% 30%, rgba(255,255,255,.95), transparent 70%),
+      radial-gradient(50% 60% at 80% 70%, rgba(235,247,241,.9), transparent 70%),
+      radial-gradient(70% 40% at 50% 100%, rgba(210,235,223,.7), transparent 70%),
+      linear-gradient(170deg, #F6FBF8 0%, #E3EFE9 100%);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 h-11 text-sm font-semibold transition-[transform,background-color,box-shadow,color,border-color] duration-200 active:scale-[.97] disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-ink {
+    @apply btn bg-gradient-to-r from-ink via-slate-900 to-emerald-950 text-white hover:from-slate-900 hover:to-emerald-900 shadow-sm hover:shadow-brand;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white ring-1 ring-emerald-400/40 hover:from-emerald-500 hover:to-teal-600 shadow-brand hover:shadow-glow;
+  }
+
+  .btn-white {
+    @apply btn bg-white text-ink hover:bg-emerald-50/50 shadow-glass border border-white/90 hover:shadow-brand transition-all hover:scale-[1.02];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-ink hover:bg-white/80 border border-line shadow-none hover:border-emerald-300;
+  }
+
+  .btn-danger {
+    @apply btn bg-gradient-to-r from-crimson to-rose-700 text-white hover:brightness-110 shadow-sm;
+  }
+
+  .field {
+    @apply w-full h-11 rounded-xl border border-line bg-white px-3.5 text-[15px] text-ink placeholder:text-steel/60 transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15 outline-none shadow-sm;
+  }
+
+  .label {
+    @apply block text-[13px] font-medium text-steel mb-1.5;
+  }
+
+  .field-dark {
+    @apply w-full rounded-xl border border-white/15 bg-white/[0.05] px-3.5 text-[15px] text-white placeholder:text-white/35 transition outline-none focus:border-brand-mint focus:ring-4 focus:ring-emerald-400/20 backdrop-blur-sm;
+  }
+
+  .label-dark {
+    @apply block text-[13px] font-medium text-white/75 mb-1.5;
+  }
+
+  .card {
+    @apply rounded-[22px] bg-white border border-line/80 shadow-[0_4px_20px_-4px_rgba(5,41,28,0.06)] transition duration-200 hover:shadow-[0_8px_30px_-6px_rgba(5,41,28,0.12)];
+  }
+}
+
+.marquee { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+.marquee:hover, .marquee:focus-within { animation-play-state: paused; }
+.marquee-reverse { animation-direction: reverse; animation-duration: 56s; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Glass gems drawn with layered gradients */
+.gem { position: relative; border-radius: 46% 54% 48% 52% / 55% 48% 52% 45%; }
+.gem::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background:
+    radial-gradient(35% 28% at 32% 26%, rgba(255,255,255,.95), transparent 70%),
+    radial-gradient(60% 50% at 70% 78%, var(--gem-light), transparent 70%),
+    radial-gradient(100% 100% at 50% 50%, var(--gem-mid) 0%, var(--gem-deep) 75%);
+}
+.gem::after { content: ''; position: absolute; inset: 12%; border-radius: inherit; border: 1px solid rgba(255,255,255,.45); mix-blend-mode: overlay; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+  .text-aurora { animation: none; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "client": {
+      "root": "client",
+      "framework": "vite"
+    },
+    "settlewise-api": {
+      "root": "server",
+      "framework": "express",
+      "entrypoint": "src/server.js",
+      "buildCommand": "npm ci"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api",
+      "destination": {
+        "service": "settlewise-api"
+      }
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "settlewise-api"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "client"
+      }
+    }
+  ]
+}
+
